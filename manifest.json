@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Bookmafx",
+  "description": "2-Columns-Filer-like Bookmark Manager",
+  "version": "0.0.1",
+  "author": "Kazuyuki TAKASE",
+  "permissions": [
+    "bookmarks"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://unpkg.com; object-src 'none'",
+  "chrome_url_overrides": {
+    "bookmarks": "index.html"
+  }
+}

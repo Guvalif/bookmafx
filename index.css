@@ -1,0 +1,20 @@
+/*!
+ * Copyright (C) 2021,
+ * - Kazuyuki TAKASE (https://github.com/Guvalif)
+ * 
+ * This software is released under the MIT License.
+ * See also: http://opensource.org/licenses/mit-license.php
+ */
+
+.button.is-fullwidth {
+  margin: 5px 0;
+}
+
+.button {
+  justify-content: left;
+  overflow: hidden;
+}
+
+#application {
+  padding: 0 5px;
+}

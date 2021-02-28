@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+  <!-- Basic Page Needs
+  ========================================================================= -->
+  <meta charset="UTF-8">
+  <meta name="author" content="Kazuyuki TAKASE">
+  <meta name="copyright" content="Copyright (C) 2021, by Kazuyuki TAKASE">
+  <link rel="license" href="http://opensource.org/licenses/mit-license.php">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmafx</title>
+
+  <!-- CSS
+  ========================================================================= -->
+  <link rel="stylesheet" href="bulma.css">
+  <link rel="stylesheet" href="index.css">
+
+  <!-- Scripts
+  ========================================================================= -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <!-- Render DOM contents dynamically here ... -->
+  <div id="application" class="columns">
+    <div id="bookmarkBar" class="column is-half">
+      <h2>Bookmark-Bar</h2>
+      <button
+        v-for="(item, index) in prettify(bookmarkBar)"
+        :key="item.id"
+        :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('bookmarkBar', index) }"
+      >
+      <input v-if="isFocused('bookmarkBar', index)" class="input is-small" type="text" v-model="item">
+      <span v-else>{{ item }}</span>
+      </button>
+    </div>
+    <div id="otherBookmarks" class="column is-half">
+      <h2>Other Bookmarks</h2>
+      <button
+        v-for="(item, index) in prettify(otherBookmarks)"
+        :key="item.id"
+        :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('otherBookmarks', index) }"
+      >
+        <input v-if="isFocused('otherBookmarks', index)" class="input is-small" type="text" v-model="item">
+        <span v-else>{{ item }}</span>
+      </button>
+    </div>
+  </div>
+</body>
+
+</html>
