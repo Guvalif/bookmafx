@@ -1,4 +1,4 @@
-Bookmafx | 2-Columuns-Filer-like Bookmark Manager
+Bookmafx | 2-Columns-Filer-like Bookmark Manager
 ===============================================================================
 
 2 画面ファイラーのキーバインドで：

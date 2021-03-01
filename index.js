@@ -109,18 +109,16 @@ const Application = {
           const ref = this[this.currentPain][this.current];
 
           if (ref) {
-            const $element = document.querySelector('.is-info input');
-            $element.value = ref.title;
+            this.$refs.$selected.value = ref.title;
 
             setTimeout(() => {
               window.removeEventListener('keydown', keyEventHandler);
               keyEventHandler = null;
-  
+
               updateEventHandler = this.updateEventHandler.bind(this);
               window.addEventListener('keydown', updateEventHandler);
-  
-              const $element = document.querySelector('.is-info input');
-              $element.focus();
+
+              this.$refs.$selected.focus();
             }, 0);
           }
 
@@ -149,12 +147,12 @@ const Application = {
             this[this.currentPain] = this[this.currentPain].filter(x => x.id !== ref.id);
             this[oppositePain].splice(0, 0, ref);
 
-            chrome.bookmarks.move(ref.id, { parentId: this[`${oppositePain}Id`], index: 0 }, () => {
-              this.currentPain = oppositePain;
-              this.current = 0;
+            this.currentPain = oppositePain;
+            this.current = 0;
 
-              this.setScrollPosition(true);
-            });
+            this.setScrollPosition(true);
+
+            chrome.bookmarks.move(ref.id, { parentId: this[`${oppositePain}Id`], index: 0 });
           }
 
           break;
@@ -199,17 +197,17 @@ const Application = {
     },
 
     updateEventHandler(event) {
+      const $element = this.$refs.$selected;
+
       if (event.key === 'Enter' && event.ctrlKey) {
-        const $element = document.querySelector('.is-info input');
         $element.blur();
 
         const ref = this[this.currentPain][this.current];
 
-        chrome.bookmarks.update(ref.id, { title: $element.value }, () => {
-          ref.title = $element.value;
+        ref.title = $element.value;
+        this[this.currentPain].splice(this.current, 1, ref);
 
-          this[this.currentPain].splice(this.current, 1, ref);
-        });
+        chrome.bookmarks.update(ref.id, { title: $element.value });
 
         setTimeout(() => {
           window.removeEventListener('keydown', updateEventHandler);
@@ -223,7 +221,7 @@ const Application = {
 
     setScrollPosition(forceScrollToTop) {
       setTimeout(() => {
-        const $element = document.querySelector('.is-info');
+        const $element = this.$refs.$selected;
 
         if ($element) {
           if (forceScrollToTop) {

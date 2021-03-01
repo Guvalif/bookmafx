@@ -33,8 +33,8 @@
         :key="item.id"
         :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('bookmarkBar', index) }"
       >
-      <input v-if="isFocused('bookmarkBar', index)" class="input is-small" type="text" v-model="item">
-      <span v-else>{{ item }}</span>
+        <input ref="$selected" v-if="isFocused('bookmarkBar', index)" class="input is-small" type="text" v-model="item">
+        <span v-else>{{ item }}</span>
       </button>
     </div>
     <div id="other-bookmarks" class="column is-half">
@@ -44,7 +44,7 @@
         :key="item.id"
         :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('otherBookmarks', index) }"
       >
-        <input v-if="isFocused('otherBookmarks', index)" class="input is-small" type="text" v-model="item">
+        <input ref="$selected" v-if="isFocused('otherBookmarks', index)" class="input is-small" type="text" v-model="item">
         <span v-else>{{ item }}</span>
       </button>
     </div>
