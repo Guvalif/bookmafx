@@ -72,7 +72,32 @@ const Application = {
         }
 
         case 'ArrowLeft': {
-          this.currentPain = 'bookmarkBar';
+          if (this.currentPain !== 'bookmarkBar') {
+            this.currentPain = 'bookmarkBar';
+            this.current = 0;
+  
+            this.setScrollPosition(true);
+          } else {
+            this.keyEventHandler({ key: 'Backspace' });
+          }
+
+          break;
+        }
+
+        case 'ArrowRight': {
+          if (this.currentPain !== 'otherBookmarks') {
+            this.currentPain = 'otherBookmarks';
+            this.current = 0;
+  
+            this.setScrollPosition(true);
+          } else {
+            this.keyEventHandler({ key: 'Backspace' });
+          }
+
+          break;
+        }
+
+        case 'Home': {
           this.current = 0;
 
           this.setScrollPosition(true);
@@ -80,11 +105,12 @@ const Application = {
           break;
         }
 
-        case 'ArrowRight': {
-          this.currentPain = 'otherBookmarks';
-          this.current = 0;
+        case 'End': {
+          if (this[this.currentPain].length) {
+            this.current = this[this.currentPain].length - 1;
 
-          this.setScrollPosition(true);
+            this.setScrollPosition(this.current === 0);
+          }
 
           break;
         }
