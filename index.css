@@ -6,6 +6,10 @@
  * See also: http://opensource.org/licenses/mit-license.php
  */
 
+html {
+  overflow: hidden;
+}
+
 .button.is-fullwidth {
   margin: 5px 0;
 }
@@ -17,4 +21,46 @@
 
 #application {
   padding: 0 5px;
+}
+
+#bookmark-bar h2 {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+  width: 100%;
+  font-weight: bold;
+}
+
+#other-bookmarks h2 {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+  width: 100%;
+  font-weight: bold;
+}
+
+#bookmark-bar-items::before {
+  content: '';
+  display: block;
+  height: 2em;
+}
+
+#bookmark-bar-items .button:first-of-type {
+  margin-top: 0;
+}
+
+#other-bookmarks-items::before {
+  content: '';
+  display: block;
+  height: 2em;
+}
+
+#other-bookmarks-items .button:first-of-type {
+  margin-top: 0;
 }

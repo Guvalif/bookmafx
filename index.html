@@ -28,25 +28,29 @@
   <div id="application" class="columns">
     <div id="bookmark-bar" class="column is-half">
       <h2>Bookmark-Bar</h2>
-      <button
-        v-for="(item, index) in prettify(bookmarkBar)"
-        :key="item.id"
-        :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('bookmarkBar', index) }"
-      >
-        <input ref="$selected" v-if="isFocused('bookmarkBar', index)" class="input is-small" type="text" v-model="item">
-        <span v-else>{{ item }}</span>
-      </button>
+      <div id="bookmark-bar-items">
+        <button
+          v-for="(item, index) in prettify(bookmarkBar)"
+          :key="item.id"
+          :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('bookmarkBar', index) }"
+        >
+          <input ref="$selected" v-if="isFocused('bookmarkBar', index)" class="input is-small" type="text" v-model="item">
+          <span v-else>{{ item }}</span>
+        </button>
+      </div>
     </div>
     <div id="other-bookmarks" class="column is-half">
       <h2>Other Bookmarks</h2>
-      <button
-        v-for="(item, index) in prettify(otherBookmarks)"
-        :key="item.id"
-        :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('otherBookmarks', index) }"
-      >
-        <input ref="$selected" v-if="isFocused('otherBookmarks', index)" class="input is-small" type="text" v-model="item">
-        <span v-else>{{ item }}</span>
-      </button>
+      <div id="other-bookmarks-items">
+        <button
+          v-for="(item, index) in prettify(otherBookmarks)"
+          :key="item.id"
+          :class="{ 'button': true, 'is-small': true, 'is-fullwidth': true, 'is-info': isFocused('otherBookmarks', index) }"
+        >
+          <input ref="$selected" v-if="isFocused('otherBookmarks', index)" class="input is-small" type="text" v-model="item">
+          <span v-else>{{ item }}</span>
+        </button>
+      </div>
     </div>
   </div>
 </body>

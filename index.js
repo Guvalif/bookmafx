@@ -16,8 +16,10 @@ const Application = {
     return {
       bookmarkBarId: '',
       bookmarkBar: [],
+      bookmarkBarScroll: 0,
       otherBookmarksId: '',
       otherBookmarks: [],
+      otherBookmarksScroll: 0,
       currentPain: 'bookmarkBar',
       current: 0,
     };
@@ -75,7 +77,7 @@ const Application = {
           if (this.currentPain !== 'bookmarkBar') {
             this.currentPain = 'bookmarkBar';
             this.current = 0;
-  
+
             this.setScrollPosition(true);
           } else {
             this.keyEventHandler({ key: 'Backspace' });
@@ -88,7 +90,7 @@ const Application = {
           if (this.currentPain !== 'otherBookmarks') {
             this.currentPain = 'otherBookmarks';
             this.current = 0;
-  
+
             this.setScrollPosition(true);
           } else {
             this.keyEventHandler({ key: 'Backspace' });
@@ -248,23 +250,27 @@ const Application = {
     setScrollPosition(forceScrollToTop) {
       setTimeout(() => {
         const $element = this.$refs.$selected;
+        const $pain = document.getElementById((this.currentPain === 'bookmarkBar') ? 'bookmark-bar-items' : 'other-bookmarks-items');
 
         if ($element) {
           if (forceScrollToTop) {
-            window.scroll({ top: 0 });
-            
+            this[`${this.currentPain}Scroll`] = 0;
+            $pain.style.marginTop = '0px';
+
             return;
           }
 
-          const overflowTop = $element.getBoundingClientRect().top;
-          const overflowBottom = $element.getBoundingClientRect().bottom - window.innerHeight;
+          const top = $element.getBoundingClientRect().top;
+          const bottom = $element.getBoundingClientRect().bottom;
 
-          if (overflowTop < 0) {
-            window.scroll({ top: Math.max(0, window.scrollY + overflowTop - 5) });
+          if (top < 32) {
+            this[`${this.currentPain}Scroll`] += (32 - top);
+            $pain.style.marginTop = `${this[`${this.currentPain}Scroll`]}px`;
           }
-  
-          if (overflowBottom > 0) {
-            window.scroll({ top: window.scrollY + overflowBottom + 5 });
+
+          if (bottom > window.innerHeight) {
+            this[`${this.currentPain}Scroll`] -= (bottom - window.innerHeight);
+            $pain.style.marginTop = `${this[`${this.currentPain}Scroll`]}px`;
           }
         }
       }, 0);
