@@ -221,7 +221,7 @@ const Application = {
         }
       }
 
-      event.preventDefault();
+      if (event.preventDefault) event.preventDefault();
     },
 
     updateEventHandler(event) {
